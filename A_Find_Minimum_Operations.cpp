@@ -1,137 +1,70 @@
-// // // #include <iostream>
-// // // #include <math.h>
-// // // using namespace std;
-
-// // // int main()
-// // // {
-// // //     int t;
-// // //     cin >> t;
-// // //     long long n, k;
-// // //     for (int i = 0; i < t; i++)
-// // //     {
-// // //         int opt = 0;
-// // //         cin >> n >> k;
-// // //         long long arr[20];
-// // //         for (int i = 0; i < 20; i++)
-// // //         {
-// // //             arr[i] = pow(k, i);
-// // //         }
-// // //         while (n > 0)
-// // //         {
-// // //             for (int i = 19; ; i++)
-// // //             {
-// // //                 if (arr[i] < n)
-// // //                 {       
-// // //                     n = n - arr[i];
-// // //                     opt++;
-// // //                     continue;
-// // //                 }
-// // //             }
-// // //         }
-// // //         cout << opt <<endl;
-// // //     }
-// // // }
-
-// // #include <iostream>
-// // using namespace std;
-
-// // // Function to calculate the minimum number of operations
-// // int min_operations(long long n, long long k) {
-// //     int operations = 0;
-
-// //     // We use greedy approach to subtract largest powers of k
-// //     while (n > 0) {
-// //         long long currentPower = 1;
-// //         // Find the largest power of k that is <= n
-// //         while (currentPower * k <= n) {
-// //             currentPower *= k;
-// //         }
-// //         // Subtract the largest power of k from n
-// //         n -= currentPower;
-// //         // Increment the number of operations
-// //         operations++;
-// //     }
-
-// //     return operations;
-// // }
-
-// // int main() {
-// //     int t;
-// //     cin >> t;  // number of test cases
-// //     while (t--) {
-// //         long long n, k;
-// //         cin >> n >> k;
-
-// //         // Output the minimum number of operations
-// //         cout << min_operations(n, k) << endl;
-// //     }
-
-// //     return 0;
-// // }
-// #include <iostream>
+// #include <bits/stdc++.h>
 // using namespace std;
+ 
+// #define ll long long
+// #define vi vector<int>
+ 
+// int dectoanybase(int dec, int base){
+    
 
-
-// int min_operations(long long n, long long k) {
-//     int operations = 0;
-
-
-//     if (k == 1) {
-//         return n; 
+//     int answer = 0;
+//     int power = 1;
+//     while (dec != 0){
+//         int temp = dec;
+//         dec = dec / base;
+//         int rem = temp % base;
+//         answer += (rem*power);
+//         power *= 10;
 //     }
-
-
-//     while (n > 0) {
-//         long long currentPower = 1;
-
-//         while (currentPower * k <= n) {
-//             currentPower *= k;
-//         }
-
-//         n -= currentPower;
-
-//         operations++;
-//     }
-
-//     return operations;
+//     return answer;
 // }
-
-// int main() {
+ 
+// int main()
+// {
 //     int t;
-//     cin >> t;  
-//     while (t--) {
-//         long long n, k;
+//     cin >> t;
+//     while (t--)
+//     {
+//         ll n, k;
 //         cin >> n >> k;
-
-//         cout << min_operations(n, k) << endl;
+//         int answer = dectoanybase(n, k);
+//         int sum = 0;
+//         while (answer != 0){
+//             sum += answer % 10;
+//             answer = answer / 10;
+//         }
+//         cout << sum << endl;
+//         //cout << answer << endl;
 //     }
-
-//     return 0;
 // }
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
+ 
+#define ll long long
 
-int min_operations(long long n, long long k) {
-    if (k == 1) return n;
-    int operations = 0;
-    while (n > 0) {
-        long long currentPower = 1;
-        while (currentPower * k <= n) {
-            currentPower *= k;
-        }
-        n -= currentPower;
-        operations++;
+int sumDigitsInBase(ll dec, int base) {
+    if (base == 1) return dec;
+    int sum = 0;
+    
+    while (dec) {
+        int rem = dec % base; 
+        sum += rem;           
+        dec /= base;          
     }
-    return operations;
+    
+    return sum;
 }
-
+ 
 int main() {
     int t;
     cin >> t;
+    
     while (t--) {
-        long long n, k;
+        ll n;
+        int k;
         cin >> n >> k;
-        cout << min_operations(n, k) << endl;
+        
+        int sum = sumDigitsInBase(n, k);
+        cout << sum << endl;
     }
-    return 0;
 }
